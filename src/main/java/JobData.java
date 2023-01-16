@@ -71,7 +71,7 @@ public class JobData {
         loadData();
         //create ArrayList of HashMaps called jobs
         ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
-        // loop through the allJobs HashMap by..row?? ...? what is happening here?
+        // loop through the allJobs HashMap by..row??
         for (HashMap<String, String> row : allJobs) {
         //set a newValue variable that stores the value at the looped row and column that was indicated as an arg
             String aValue = row.get(column);
@@ -95,7 +95,6 @@ public class JobData {
         // load data, if not already loaded
         loadData();
 
-        // TODO - implement this method
         //create a new ArrayList of HashMaps called jobs, again
         ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
         //loop through the allJobs HashMap by row
@@ -103,10 +102,10 @@ public class JobData {
             //within that for loop, use another for loop to go through the Map.Entry
             //of the column within the entrySet of rows...
             for (Map.Entry<String, String> column : row.entrySet()) {
-                //get key from this column and store it as a new value
-                String aKey = column.getKey();
-                //if newKey contains the value that was passed as an arg, add the row to the jobs arrayList
-                if (aKey.contains(value)) {
+                //get value from this column and store it as a new value
+                String newValue = column.getValue();
+                //if newValue contains the value that was passed as an arg(searchTerm, add the row to the jobs arrayList
+                if (newValue.contains(value)) {
                     jobs.add(row);
                 }
             }
