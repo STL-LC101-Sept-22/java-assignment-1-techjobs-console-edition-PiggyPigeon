@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,7 +11,7 @@ public class TechJobs {
 
     static Scanner in = new Scanner(System.in);
 
-    public static void main (String[] args) {
+    public static void main(String[] args) {
 
         // Initialize our field map with key/name pairs
         HashMap<String, String> columnChoices = new HashMap<>();
@@ -112,14 +113,39 @@ public class TechJobs {
                 validChoice = true;
             }
 
-        } while(!validChoice);
+        } while (!validChoice);
 
         return choiceKeys[choiceIdx];
     }
 
     // Print a list of jobs
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
+        //if someJobs has no size/length then print out "No Results"
+        if (someJobs.size() == 0) {
+            System.out.println("No Results");
+        }
+        //else, loop through the someJobs arrayList of HashMaps.
+        else {
+            for (int i = 0; i < someJobs.size(); i++) {
+                //first print the 5 asterisks
+                System.out.println("*****");
 
-        System.out.println("printJobs is not implemented yet");
+                //now loop within this loop to get the HashMap entrySet with Map.Entry. use someJobs.get(i).entrySet()
+                for (Map.Entry<String, String> entry : someJobs.get(i).entrySet()) {
+                    //set keys and values of this entry to variables
+                    String key = entry.getKey();
+                    String value = entry.getValue();
+
+                    //print out these variables
+                    System.out.println(key + ": " + value);
+                }
+                //after this loop, print anther 5 asterisks and a new line
+                System.out.println("*****\n");
+            }
+        }
     }
 }
+
+
+
+
