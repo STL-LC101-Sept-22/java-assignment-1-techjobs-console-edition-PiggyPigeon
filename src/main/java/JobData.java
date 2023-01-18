@@ -5,10 +5,7 @@ import org.apache.commons.csv.CSVRecord;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by LaunchCode
@@ -65,25 +62,28 @@ public class JobData {
      * with "Enterprise Holdings, Inc".
      *
      * @param column   Column that should be searched.
-     * @param value Value of teh field to search for
+     * @param value Value of the field to search for
      * @return List of all jobs matching the criteria
      */
     public static ArrayList<HashMap<String, String>> findByColumnAndValue(String column, String value) {
 
         // load data, if not already loaded
         loadData();
-
+        //create ArrayList of HashMaps called jobs
         ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
-
+        // loop through the allJobs HashMap by..row??
         for (HashMap<String, String> row : allJobs) {
-
+        //set a newValue variable that stores the value at the looped row and column that was indicated as an arg
             String aValue = row.get(column);
-
+            //make aValue and the search term lowercase
+            aValue = aValue.toLowerCase();
+            value = value.toLowerCase();
+        //if the newValue contains the value passed as an arg, add it to the jobs ArrayList(of HashMaps)
             if (aValue.contains(value)) {
                 jobs.add(row);
             }
         }
-
+        //return the newly created jobs ArrayList
         return jobs;
     }
 
@@ -98,8 +98,24 @@ public class JobData {
         // load data, if not already loaded
         loadData();
 
-        // TODO - implement this method
-        return null;
+        //create a new ArrayList of HashMaps called jobs, again
+        ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
+        //loop through the allJobs HashMap by row
+        for (HashMap<String, String> row : allJobs) {
+            //within that for loop, use another for loop to go through the Map.Entry
+            //of the column within the entrySet of rows...
+            for (Map.Entry<String, String> column : row.entrySet()) {
+                //get value from this column and store it as a new value
+                String newValue = column.getValue();
+                newValue = newValue.toLowerCase();
+                value = value.toLowerCase();
+                //if newValue contains the value that was passed as an arg(searchTerm, add the row to the jobs arrayList
+                if (newValue.contains(value)) {
+                    jobs.add(row);
+                }
+            }
+        }
+        return jobs;
     }
 
     /**
