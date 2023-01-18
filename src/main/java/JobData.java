@@ -75,6 +75,9 @@ public class JobData {
         for (HashMap<String, String> row : allJobs) {
         //set a newValue variable that stores the value at the looped row and column that was indicated as an arg
             String aValue = row.get(column);
+            //make aValue and the search term lowercase
+            aValue = aValue.toLowerCase();
+            value = value.toLowerCase();
         //if the newValue contains the value passed as an arg, add it to the jobs ArrayList(of HashMaps)
             if (aValue.contains(value)) {
                 jobs.add(row);
@@ -104,6 +107,8 @@ public class JobData {
             for (Map.Entry<String, String> column : row.entrySet()) {
                 //get value from this column and store it as a new value
                 String newValue = column.getValue();
+                newValue = newValue.toLowerCase();
+                value = value.toLowerCase();
                 //if newValue contains the value that was passed as an arg(searchTerm, add the row to the jobs arrayList
                 if (newValue.contains(value)) {
                     jobs.add(row);
